@@ -4,8 +4,8 @@ pipeline {
     environment {
         // Set environment variables for GitHub repository and Docker Hub credentials
         GITHUB_REPO = 'https://github.com/rotemlevin271/workproject.git'
-        DOCKER_HUB_USERNAME = credentials('rotemlevin')
-        DOCKER_HUB_PASSWORD = credentials('0546601040')
+        // DOCKER_HUB_USERNAME = credentials('rotemlevin')
+        // DOCKER_HUB_PASSWORD = credentials('0546601040')
         DOCKER_IMAGE_NAME = 'webserver'
         DOCKER_IMAGE_TAG = 'latest'
     }
