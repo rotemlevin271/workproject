@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Echo Word') {
             steps {
-                sh 'echo Hello'
+                def 'echo Hello'
             }
         }
     }
