@@ -18,34 +18,34 @@ pipeline {
             }
         }
 
-        // stage('Build Docker Image') {
-        //     steps {
-        //         // Build Docker image from the Dockerfile in the repository
-        //         script {
-        //             def dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}", "./Dockerfile") 
-        //         }
-        //     }
-        // }
+        stage('Build Docker Image') {
+            steps {
+                // Build Docker image from the Dockerfile in the repository
+                script {
+                    def dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}", "./Dockerfile") 
+                }
+            }
+        }
 
-        // stage('Push to Docker Hub') {
-        //     steps {
-        //         // Push the Docker image to Docker Hub
-        //         script {
-        //             docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_USERNAME, DOCKER_HUB_PASSWORD) {
-        //                 def dockerImage = docker.image("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
-        //                 dockerImage.push()
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push to Docker Hub') {
+            steps {
+                // Push the Docker image to Docker Hub
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_USERNAME, DOCKER_HUB_PASSWORD) {
+                        def dockerImage = docker.image("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
 
-        // stage('Checkout SCM') {
-        //     steps {
-        //         checkout([$class: 'GitSCM',
-        //                   branches: [[name: '*/master']],
-        //                   userRemoteConfigs: [[url: 'https://github.com/rotemlevin271/workproject.git']]
-        //                 ])
-        //         }
-        //     }
-        }    
+        stage('Checkout SCM') {
+            steps {
+                checkout([$class: 'GitSCM',
+                          branches: [[name: '*/master']],
+                          userRemoteConfigs: [[url: 'https://github.com/rotemlevin271/workproject.git']]
+                ])
+            }
+        }
     }
+}
