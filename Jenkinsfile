@@ -38,5 +38,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Checkout SCM') {
+            steps {
+                checkout([$class: 'GitSCM',
+                          branches: [[name: '*/master']],
+                          userRemoteConfigs: [[url: 'https://github.com/rotemlevin271/workproject.git']]
+                        ])
+                }
+            }
+        }    
     }
-}
