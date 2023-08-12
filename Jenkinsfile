@@ -21,21 +21,27 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build Docker image from the Dockerfile in the repository
-                sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ."
+                sh """
+                    docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .
+                """
             }
         }
 
         stage('Login to Docker Hub') {
             steps {
                 // Login to Docker Hub
-                sh "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
+                sh """
+                    echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin
+                """
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
                 // Push the Docker image to Docker Hub
-                sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                sh """
+                    docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+                """
             }
         }
 
