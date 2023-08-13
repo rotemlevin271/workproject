@@ -14,7 +14,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone the GitHub repository
-                sh "git clone ${GITHUB_REPO}"
+                sh 'git clone ${GITHUB_REPO}'
             }
         }
 
@@ -30,25 +30,21 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 // Login to Docker Hub
-                sh """
-                    echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin
-                """
+                sh 'echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin'
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
                 // Push the Docker image to Docker Hub
-                sh """
-                    docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
-                """
+                sh 'docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}'
             }
         }
 
         stage('Checkout SCM') {
             steps {
-                sh "git checkout master"
-                sh "git pull origin master"
+                sh 'git checkout master'
+                sh 'git pull origin master'
             }
         }
     }
